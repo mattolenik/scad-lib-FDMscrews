@@ -208,13 +208,12 @@ module screw_internal
   //echo(evalparams);
   //echo(evalindices);
 
-  // WARNING: Too many unnamed arguments supplied, in file lib-FDMscrews.scad, line 217 -- ???
   // i[0] ... direction vector with unit length
   // i[1] ... cylindercoord evaluation angle for user supplied function (can go negative!!)
   // i[2] ... cylindercoord evaluation height for user supplied function
   preevalpoints =
     [ for(i=evalparams)
-      concat( i[0]*profileradiusfunction(starts*i[1]+offsetangle+360,i[2]), i[2] ) ];
+      concat( i[0]*profileradiusfunction(starts*i[1]+offsetangle+360), i[2] ) ];
     
   translate([0,0,0])
     polyhedron(points = concat(preevalpoints,[[0,0,0],[0,0,z_max]]),faces = evalindices,convexity =3);
